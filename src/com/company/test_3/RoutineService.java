@@ -6,19 +6,19 @@ import java.util.Scanner;
 
 
 public class RoutineService {
-    private final List<CourseDetails> allCourseDetails = new ArrayList<CourseDetails>();
+    private final List<Course> allCourseDetails = new ArrayList<Course>();
     private int[][] routine = new int[5][4];
 
     public RoutineService() {
-        allCourseDetails.add(new CourseDetails("English Grammar","John Smith"));
-        allCourseDetails.add(new CourseDetails("Mathematics","Lara Gilbert"));
-        allCourseDetails.add(new CourseDetails("Physics","Johanna Kabir"));
-        allCourseDetails.add(new CourseDetails("Chemistry","Danniel Robertson"));
-        allCourseDetails.add(new CourseDetails("Biology","Larry Cooper"));
+        allCourseDetails.add(new Course("English Grammar","John Smith"));
+        allCourseDetails.add(new Course("Mathematics","Lara Gilbert"));
+        allCourseDetails.add(new Course("Physics","Johanna Kabir"));
+        allCourseDetails.add(new Course("Chemistry","Danniel Robertson"));
+        allCourseDetails.add(new Course("Biology","Larry Cooper"));
     }
 
     public void showCourseDetails(){
-        for (CourseDetails courseDetails : allCourseDetails) {
+        for (Course courseDetails : allCourseDetails) {
             System.out.println(courseDetails.getCourseName() + ", " + courseDetails.getTeacherName()
             );
         }
@@ -27,7 +27,7 @@ public class RoutineService {
     public void buildRoutine(){
         Scanner input = new Scanner(System.in);
         int i =1;
-        for (CourseDetails courseDetails : allCourseDetails) {
+        for (Course courseDetails : allCourseDetails) {
             System.out.println(i+" "+courseDetails.getCourseName());
             i++;
         }

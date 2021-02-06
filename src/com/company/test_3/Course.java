@@ -1,10 +1,10 @@
 package com.company.test_3;
 
-public class CourseDetails {
+public class Course {
     private final String courseName;
     private final String teacherName;
 
-    public CourseDetails(String courseName, String teacherName) {
+    public Course(String courseName, String teacherName) {
         this.courseName = courseName;
         this.teacherName = teacherName;
     }

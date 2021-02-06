@@ -1,8 +1,10 @@
-package com.company.test_3;
+package com.company.test_3.main;
+
+import com.company.test_3.RoutineService;
 
 import java.util.Scanner;
 
-public class MainOfOOP {
+public class Main {
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
         RoutineService mRoutineService = new RoutineService();
