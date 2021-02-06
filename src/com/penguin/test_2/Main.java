@@ -1,10 +1,10 @@
-package com.company.test_2;
+package com.penguin.test_2;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MainOfProblemSolve {
+public class Main {
 
     public static void main(String[] args) {
 

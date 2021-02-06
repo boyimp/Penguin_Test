@@ -1,6 +1,6 @@
-package com.company.test_3.main;
+package com.penguin.test_3.main;
 
-import com.company.test_3.RoutineService;
+import com.penguin.test_3.service.RoutineService;
 
 import java.util.Scanner;
 
@@ -22,7 +22,7 @@ public class Main {
                     mRoutineService.buildRoutine();
                     break;
                 case "B":
-                    mRoutineService.showRoutine();
+                    mRoutineService.printRoutine();
                     break;
                 case "C":
                     mRoutineService.showCourseDetails();

@@ -1,4 +1,6 @@
-package com.company.test_3;
+package com.penguin.test_3.service;
+
+import com.penguin.test_3.model.Course;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +55,7 @@ public class RoutineService {
         }
     }
 
-    public void showRoutine(){
+    public void printRoutine(){
         for(int row = 0; row <= 4; row++){
             for(int column = 0 ; column <= 3; column++){
                 if(routine[row][column] != 0){
