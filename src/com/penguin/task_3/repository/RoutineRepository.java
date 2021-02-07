@@ -1,13 +1,13 @@
 package com.penguin.task_3.repository;
 
 import com.penguin.task_3.model.Course;
+import com.penguin.task_3.model.Period;
 import com.penguin.task_3.model.Routine;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RoutineRepository {
 
-    static int count = 0;
     //Fields
     private Routine routine;
     private final List<Course> courses = new ArrayList<Course>(
@@ -30,8 +30,8 @@ public class RoutineRepository {
         return routine;
     }
 
-    public void setRoutine(Routine routine) {
-        this.routine = routine;
+    public void setRoutine(Period period){
+        routine.getDays()[period.getDayIndex()].setPeriod(period.getHourIndex(),period);
     }
 
     public List<Course> getCourses() {

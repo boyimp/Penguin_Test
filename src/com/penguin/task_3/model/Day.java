@@ -2,7 +2,7 @@ package com.penguin.task_3.model;
 
 
 public class Day {
-    private Period[] periods;
+    private final Period[] periods;
 
     public Day(int maxPeriod) {
         this.periods = new Period[maxPeriod];

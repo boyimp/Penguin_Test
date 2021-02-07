@@ -5,7 +5,7 @@ import com.penguin.task_3.repository.RoutineRepository;
 
 public class Validator {
 
-    private RoutineRepository routineRepository ;
+    private final RoutineRepository routineRepository ;
 
     public Validator(RoutineRepository routineRepository) {
         this.routineRepository = routineRepository;

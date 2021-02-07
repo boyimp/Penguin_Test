@@ -18,9 +18,6 @@ public class Routine {
     }
 
     //Methods
-    public void setPeriod(Period period){
-        days[ period.getDayIndex() ].setPeriod( period.getHourIndex() , period );
-    }
 
     public Day[] getDays() {
         return days;

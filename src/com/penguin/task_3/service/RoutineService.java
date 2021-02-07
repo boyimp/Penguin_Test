@@ -1,39 +1,32 @@
 package com.penguin.task_3.service;
 
-import com.penguin.task_3.model.Course;
 import com.penguin.task_3.model.Period;
-import com.penguin.task_3.model.Routine;
 import com.penguin.task_3.repository.RoutineRepository;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class RoutineService {
 
-    private RoutineRepository routineRepository;
-    private List<Course> courses;
-    private Routine routine;
-    private Validator validator;
-    private InputTaker inputTaker;
+    private final RoutineRepository routineRepository;
+    private final Validator validator;
+    private final InputTaker inputTaker;
 
     public RoutineService(
             RoutineRepository routineRepository,
             Validator validator,
             InputTaker inputTaker) {
 
-        this.routineRepository = routineRepository;
         this.validator = validator;
         this.inputTaker = inputTaker;
-        this.courses = routineRepository.getCourses();
-        this. routine = routineRepository.getRoutine();
-
+        this.routineRepository = routineRepository;
     }
 
     public void showCourseDetails(){
-        courses.forEach(course ->
+        System.out.println("\nCourse Details:");
+        routineRepository.getCourses().forEach(course ->
                 System.out.println(
                         course.getCourseName() + ", " +
                                 course.getTeacherName()));
@@ -45,37 +38,69 @@ public class RoutineService {
         int dayIndex , hourIndex , courseIndex;
         AtomicInteger i = new AtomicInteger(1);
 
-        courses.forEach(course -> {
-                    System.out.println(i+" "+course.getCourseName());
-                    i.getAndIncrement();
-                        });
+
+        System.out.println("\nChoose a course from here : ");
+        routineRepository.getCourses().forEach(course -> {
+            System.out.println(i+" "+course.getCourseName());
+            i.getAndIncrement();
+        });
+
 
         dayIndex = inputTaker.getDayIndexFromConsole();
-        hourIndex = inputTaker.getHourIndexFromConsole();
-        courseIndex = inputTaker.getCourseIndexFromConsole();
-
-        if(validator.isDayValid(dayIndex) &&
-                validator.isHourValid(hourIndex) &&
-                validator.isCourseValid(courseIndex)){
-
-            Period period = new Period(dayIndex,hourIndex,courseIndex);
-            routine.setPeriod(period);
-
-            return true;
-        }else{
+        if(validator.isDayValid(dayIndex)){
+            hourIndex = inputTaker.getHourIndexFromConsole();
+            if(validator.isHourValid(hourIndex)){
+                courseIndex = inputTaker.getCourseIndexFromConsole();
+                if(validator.isCourseValid(courseIndex)){
+                    Period period = new Period(dayIndex,hourIndex,courseIndex);
+                    routineRepository.setRoutine(period);
+                    return true;
+                }else {
+                    return false;
+                }
+            }else {
+                return false;
+            }
+        }else {
             return false;
         }
+
     }//End of build routine
 
     public void printRoutine(){
-
-        Arrays.stream(routine.getDays()).forEach(day ->
+        System.out.println("\nRoutine");
+        System.out.println("------------------------------------");
+        System.out.println("| Day | Hour |    Course Name      |");
+        System.out.println("------------------------------------");
+        Arrays.stream(routineRepository.getRoutine().getDays()).forEach(day ->
                 Arrays.stream(day.getPeriods()).filter(
-                        Objects::nonNull).forEach(period ->
-                        System.out.println(
-                                        period.getDayIndex() + "," +
-                                                period.getHourIndex() + "," +
-                                                courses.get(period.getCourseIndex()).getCourseName()
-                                )));
+                        Objects::nonNull).forEach(period ->{
+
+                            int space = (20 - routineRepository.getCourses()
+                                    .get(period.getCourseIndex()-1)
+                                    .getCourseName()
+                                    .length());
+
+
+                            System.out.println("|  " +
+                                    period.getDayIndex() + "  |  " +
+                                    period.getHourIndex() + "   | " +
+                                    routineRepository.getCourses()
+                                            .get( period.getCourseIndex()-1 )
+                                            .getCourseName() +
+                                    " ".repeat(space) + "|"
+                            );
+
+                            if( ((period.getHourIndex() %
+                                    (routineRepository.getRoutine()
+                                            .getMaxPeriodInADay()-1) ) == 0)
+                                    &&
+                                    (period.getHourIndex() != 0) ){
+                                System.out.println("------------------------------------");
+                            }
+
+                        }
+                        ));
+        System.out.println("------------------------------------");
     }
 }

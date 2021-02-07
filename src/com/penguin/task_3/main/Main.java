@@ -7,6 +7,7 @@ import com.penguin.task_3.service.Validator;
 
 public class Main {
     public static void main(String[] args){
+        System.out.println("Welcome in Penguin Routine Service @_@");
 
         //Dependencies
         RoutineRepository routineRepository = new RoutineRepository();
@@ -15,16 +16,23 @@ public class Main {
         RoutineService routineService = new RoutineService(routineRepository, validator, inputTaker);
 
         //App's starting point
-        controller(routineService,inputTaker);
+        start(routineService,inputTaker);
 
     }//end of main
 
-    static void controller(RoutineService routineService,InputTaker inputTaker){
+    private static void start( RoutineService routineService,InputTaker inputTaker ){
         while (true){
             String choice = inputTaker.getUserChoiceFromConsole();
             switch (choice){
                 case "A":
-                    routineService.buildRoutine();
+                    if(routineService.buildRoutine()){
+                        System.out.println("\nAttempt successful");
+                    }else{
+                        System.out.println("\nAlert!\n" +
+                                "Attempt unsuccessful!\n" +
+                                "Invalid input!\n" +
+                                "Try again...");
+                    }
                     System.out.println();
                     break;
                 case "B":
@@ -38,9 +46,10 @@ public class Main {
                 case "D":
                     return;
                 default:
-                    System.out.println("Invalid Choice!!!");
+                    System.out.println("\nInvalid Choice!!!");
             }
         }
+    }//End of start function
 
-    }
-}
+
+}//End of class
