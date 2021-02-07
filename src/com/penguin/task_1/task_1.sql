@@ -4,8 +4,9 @@
 SELECT courses.name,
 	   teachers.name
 FROM courses,
+FULL JOIN
 	 teachers
-Where courses.teacher_id = teachers.id;
+	 on courses.teacher_id = teachers.id;
 
 <-- 2.List teachers who take the highest number of courses -->
 WITH temp_table AS(

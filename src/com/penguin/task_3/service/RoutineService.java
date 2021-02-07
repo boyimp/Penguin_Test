@@ -10,10 +10,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class RoutineService {
 
+    //Dependencies
     private final RoutineRepository routineRepository;
     private final Validator validator;
     private final InputTaker inputTaker;
 
+    //Constructor
     public RoutineService(
             RoutineRepository routineRepository,
             Validator validator,
@@ -24,6 +26,7 @@ public class RoutineService {
         this.routineRepository = routineRepository;
     }
 
+    //Methods
     public void showCourseDetails(){
         System.out.println("\nCourse Details:");
         routineRepository.getCourses().forEach(course ->
@@ -36,52 +39,63 @@ public class RoutineService {
 
         //initialization
         int dayIndex , hourIndex , courseIndex;
-        AtomicInteger i = new AtomicInteger(1);
+        AtomicInteger teacherID = new AtomicInteger(1);
 
 
         System.out.println("\nChoose a course from here : ");
         routineRepository.getCourses().forEach(course -> {
-            System.out.println(i+" "+course.getCourseName());
-            i.getAndIncrement();
+            System.out.println(teacherID+" "+course.getCourseName());
+            teacherID.getAndIncrement();
         });
 
 
         dayIndex = inputTaker.getDayIndexFromConsole();
+        //1st if
         if(validator.isDayValid(dayIndex)){
             hourIndex = inputTaker.getHourIndexFromConsole();
+            //2nd if
             if(validator.isHourValid(hourIndex)){
                 courseIndex = inputTaker.getCourseIndexFromConsole();
+                //3rd if
                 if(validator.isCourseValid(courseIndex)){
                     Period period = new Period(dayIndex,hourIndex,courseIndex);
                     routineRepository.setRoutine(period);
                     return true;
-                }else {
+                }//End of 3rd if
+                //3rd else
+                else {
                     return false;
-                }
-            }else {
+                }//End of 3rd else
+            }//End of 2nd if
+            //2nd else
+            else {
                 return false;
-            }
-        }else {
+            }//End of 2nd else
+        }//End of 1st if
+        //1st else
+        else {
             return false;
-        }
+        }//End of 1st else
 
     }//End of build routine
 
     public void printRoutine(){
-        System.out.println("\nRoutine");
+        System.out.println("\nROUTINE");
         System.out.println("------------------------------------");
         System.out.println("| Day | Hour |    Course Name      |");
         System.out.println("------------------------------------");
+
         Arrays.stream(routineRepository.getRoutine().getDays()).forEach(day ->
                 Arrays.stream(day.getPeriods()).filter(
                         Objects::nonNull).forEach(period ->{
 
+                            //Count spaces needed after a course name
                             int space = (20 - routineRepository.getCourses()
                                     .get(period.getCourseIndex()-1)
                                     .getCourseName()
                                     .length());
 
-
+                            //Print a period information
                             System.out.println("|  " +
                                     period.getDayIndex() + "  |  " +
                                     period.getHourIndex() + "   | " +
@@ -91,6 +105,7 @@ public class RoutineService {
                                     " ".repeat(space) + "|"
                             );
 
+                            //Find end of a day in the routine
                             if( ((period.getHourIndex() %
                                     (routineRepository.getRoutine()
                                             .getMaxPeriodInADay()-1) ) == 0)
@@ -102,5 +117,5 @@ public class RoutineService {
                         }
                         ));
         System.out.println("------------------------------------");
-    }
-}
+    }//End of print routine
+}//End of class

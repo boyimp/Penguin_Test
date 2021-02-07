@@ -1,16 +1,20 @@
 package com.penguin.task_3.model;
 
 public class Period {
-    private int dayIndex;
-    private int hourIndex;
-    private int courseIndex;
 
+    //Fields
+    private final int dayIndex;
+    private final int hourIndex;
+    private final int courseIndex;
+
+    //Constructor
     public Period(int dayIndex, int hourIndex, int courseIndex) {
         this.dayIndex = dayIndex;
         this.hourIndex = hourIndex;
         this.courseIndex = courseIndex;
     }
 
+    //Methods
     public int getDayIndex() {
         return dayIndex;
     }

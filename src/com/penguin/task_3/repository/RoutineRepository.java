@@ -8,9 +8,9 @@ import java.util.List;
 
 public class RoutineRepository {
 
-    //Fields
-    private Routine routine;
-    private final List<Course> courses = new ArrayList<Course>(
+    //Dependencies
+    private final Routine routine;
+    private final List<Course> courses = new ArrayList<>(
             List.of(
                     new Course("English Grammar","John Smith"),
                     new Course("Mathematics","Lara Gilbert"),
@@ -22,6 +22,7 @@ public class RoutineRepository {
 
     //Constructor
     public RoutineRepository() {
+        //initialization of Routine object
         this.routine = new Routine();
     }
 
