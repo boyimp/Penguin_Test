@@ -1,4 +1,4 @@
-package com.penguin.test_3.model;
+package com.penguin.task_3.model;
 
 public class Course {
     private final String courseName;

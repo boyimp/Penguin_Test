@@ -1,4 +1,4 @@
-package com.penguin.test_2;
+package com.penguin.task_2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class Main {
             if(temporary == -1){
                 break;
             }else{
-                if(temporary <= 1.1 || temporary >= 3){
+                if(temporary <= 1.1 || temporary > 3){
                     System.out.println("Invalid input!!");
                 }else{
                     weightList.add(temporary);
@@ -85,13 +85,14 @@ public class Main {
                         }//Second Loop
                     }//Second if
 
+                    //update current state
                     sum = 0.0;
                     weightList.set(firstBagIndex,0.0);
                     weightList.set(secondBagIndex,0.0);
                     trip++;
-
                 }//First if
             }//First Loop
+
             return trip;
         }//Other case
     }//Janitor Intelligent function
